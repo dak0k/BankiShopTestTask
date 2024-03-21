@@ -21,7 +21,7 @@
 <div class="container">
     <h1>Image Gallery</h1>
     <div class="row">
-        @foreach ($images as $image)
+        @forelse ($images as $image)
         <div class="col-md-4 col-12">
           
             <div class="card h-100" style="">
@@ -34,7 +34,9 @@
                 </div>
               </div>
         </div>
-    @endforeach
+        @empty
+        <h3>No images.</h3>
+    @endforelse
     </div>
   
 </div>
