@@ -21,5 +21,5 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- \
     --filename=composer \
     --install-dir=/usr/local/bin
-RUN composer install && php artisan key:generate && php artisan migrate && php artisan cache:clear && php artisan route:clear && php artisan storage:link
+
 WORKDIR /var/www
