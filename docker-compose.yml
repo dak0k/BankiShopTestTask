@@ -44,5 +44,6 @@ services:
       - PMA_ARBITRARY=1
     depends_on:
       - db
+    container_name: project_phpmyadmin
 
 
