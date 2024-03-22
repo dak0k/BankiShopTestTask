@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageRequest;
+use App\Models\Image;
 use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Image;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
 class ImageController extends Controller
 {
-
     public function __construct(private ImageService $imageService)
     {
     }
@@ -30,18 +30,18 @@ class ImageController extends Controller
     {
         $image = Image::find($id);
         $zip = new \ZipArchive();
-        $zipFileName = $image->filename . '.zip';
-    
-        if ($zip->open(public_path($zipFileName), \ZipArchive::CREATE) === TRUE) {
-            $zip->addFile(storage_path('app/public/images/' . $image->filename), $image->filename);
+        $zipFileName = $image->filename.'.zip';
+
+        if ($zip->open(public_path($zipFileName), \ZipArchive::CREATE) === true) {
+            $zip->addFile(storage_path('app/public/images/'.$image->filename), $image->filename);
             $zip->close();
-    
+
             return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
         }
-    
+
         return back()->with('error', 'Unable to create zip file.');
     }
-    
+
     public function upload(ImageRequest $request): RedirectResponse
     {
         $validated = $request->validated();
@@ -52,5 +52,4 @@ class ImageController extends Controller
 
         return back()->with('success', 'Images uploaded successfully');
     }
-
 }

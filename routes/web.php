@@ -3,8 +3,7 @@
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('upload-image', function(){
+Route::get('upload-image', function () {
     return view('upload-image');
 });
 Route::get('/upload', [ImageController::class, 'showForm'])->name('upload.form');
